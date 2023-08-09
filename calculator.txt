@@ -1,0 +1,48 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int[] d = {1,2,3,4,5,6,7,8,9,10}; // Массив d
+
+        System.out.print("Введите выражение (например, 5 + 3, 1 * 2, 3 / 3, 1 - 10): ");
+        String input = scanner.nextLine();
+
+        String[] parts = input.split(" "); //каждый элем. массива разделяем
+        int a = Integer.parseInt(parts[0].trim()); //удаляем сплит= пробелы и перобразуем в целое число
+        char operator = parts[1].charAt(0);// вызываем методом чарат оператор действия
+        int b = Integer.parseInt(parts[2].trim()); // преобразуем методом интегер строку в число и удаляем пробел
+
+        if (a < 1 || a > 10 || b < 1 || b > 10) { // исключаем числа не входящие в массив d
+            System.out.println("throws Exception : числа должны быть от 1 до 10");
+            return;
+        }
+
+        double result = 0; // инициируем новую переменную результ для ее дальнейшего использования в арифметике
+        switch (operator) {
+            case '+':    // условия
+                result = a + b; // действие
+                break;      // прерываем действие
+            case '-':
+                result = a - b;
+                break;
+            case '*':
+                result = a * b;
+                break;
+            case '/':
+                if (b != 0) {     // условия при делении б не ровно 0 нельзя делить на 0
+                    result = (int) a / b;
+                } else {
+                    System.out.println("throws Exception : деление на ноль");
+                    return;
+                }
+                break;
+            default:    // при всех других действиях кроме указаных в условиях прерывание
+                System.out.println("throws Exception : недопустимая операция");
+                return;
+        }
+
+        System.out.println("Ответ: " + a + " " + operator + " " + b + " = " + result);
+    }
+}
